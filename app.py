@@ -1,6 +1,6 @@
 import dash
 import plotly.graph_objects as go
-from plotly.subplots import make_subplotsos
+from plotly.subplots import make_subplots
 from dash import dcc, html
 from dash.dependencies import Input, Output, State
 import pandas as pd
