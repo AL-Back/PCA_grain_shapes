@@ -1,7 +1,6 @@
 import dash
-import os
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
+from plotly.subplots import make_subplotsos
 from dash import dcc, html
 from dash.dependencies import Input, Output, State
 import pandas as pd
@@ -43,9 +42,7 @@ app.layout = html.Div([
 # Function needed for the app
 def get_image_path(target_value):
     # Function to get the image path
-    base_path = os.path.dirname(os.path.abspath(__file__))  # Get the directory of the current script
-    image_folder = 'Galena_binary_images'
-    return os.path.join(base_path, image_folder, target_value)
+    return f'Galena_binary_images\\{target_value}'
 
 def display_image_link(clickData, figure, last_clicked):
 	# Function that displays the image of the clicked linked point in one of the three PCA plots, making the point red for visualization purposes.
