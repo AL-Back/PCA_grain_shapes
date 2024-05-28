@@ -1,4 +1,5 @@
 import dash
+import os
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from dash import dcc, html
@@ -35,17 +36,14 @@ app.layout = html.Div([
     dcc.Store(id='last-clicked', data=None),
     html.Div(id='image-container', style={'width': '30%', 'display': 'inline-block', 'verticalAlign': 'top', 'textAlign': 'center'})
 ], style={'backgroundColor': 'white', 'color': 'black', 'font-family': 'Arial'})
-# Callback needed
-@app.callback(Output('scatter-plot', 'figure'), Output('image-container', 'children'), Output('last-clicked', 'data'),
-			  Input('scatter-plot', 'clickData'), State('scatter-plot', 'figure'), State('last-clicked', 'data'))
 
 # Function needed for the app
 def get_image_path(target_value):
     # Function to get the image path
-    return f'Galena_binary_images\\{target_value}'
+    return f'Galena_binary_images/{target_value}'
 
 def display_image_link(clickData, figure, last_clicked):
-	# Function that displays the image of the clicked linked point in one of the three PCA plots, making the point red for visualization purposes.
+    # Function that displays the image of the clicked linked point in one of the three PCA plots, making the point red for visualization purposes.
     if clickData:
         point_clicked = clickData['points'][0]
         target_value = point_clicked['text']
@@ -66,7 +64,7 @@ def display_image_link(clickData, figure, last_clicked):
         # Display the image with maintained aspect ratio
         image_div = html.Div([
             html.Img(src=f'data:image/png;base64,{encoded_image}',
-					 style={'width': '400px', 'height': 'auto', 'margin': '0 auto'}),
+                     style={'width': '400px', 'height': 'auto', 'margin': '0 auto'}),
             html.Br(),
             html.A('Open Graph in New Window', href='http://localhost:8050', target='_blank', 
                    style={'fontSize': '20px', 'textDecoration': 'none', 'color': 'blue'})
@@ -74,5 +72,15 @@ def display_image_link(clickData, figure, last_clicked):
         return figure, image_div, new_last_clicked
     return figure, "Click on a point to see the image", last_clicked
 
+@app.callback(
+    [Output('scatter-plot', 'figure'),
+     Output('image-container', 'children'),
+     Output('last-clicked', 'data')],
+    [Input('scatter-plot', 'clickData')],
+    [State('scatter-plot', 'figure'), State('last-clicked', 'data')]
+)
+def update_figure(clickData, figure, last_clicked):
+    return display_image_link(clickData, figure, last_clicked)
+
 if __name__ == '__main__':
-	app.run_server(debug=True)
+    app.run_server(debug=True)
