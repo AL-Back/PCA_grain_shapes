@@ -14,6 +14,32 @@ server = app.server
 # Get the PCA data
 plot_df = pd.read_csv('PCA_galena_grains.csv')
 
+# Create the PCA graph
+fig = make_subplots(rows=3, cols=1, vertical_spacing=0.06)
+fig.append_trace(go.Scatter(x=plot_df['Principal component 1'], y=plot_df['Principal component 2'], mode="markers", hoverinfo='text', text=plot_df['Target']), row=1, col=1)
+fig.append_trace(go.Scatter(x=plot_df['Principal component 2'], y=plot_df['Principal component 3'], mode="markers", hoverinfo='text', text=plot_df['Target']), row=2, col=1)
+fig.append_trace(go.Scatter(x=plot_df['Principal component 1'], y=plot_df['Principal component 3'], mode="markers", hoverinfo='text', text=plot_df['Target']), row=3, col=1)
+fig.update_traces(marker=dict(color=['blue'] * len(plot_df)))
+# Update xaxis labels
+fig.update_xaxes(title_text="Principal component 1", row=1, col=1)
+fig.update_xaxes(title_text="Principal component 2", row=2, col=1)
+fig.update_xaxes(title_text="Principal component 1", row=3, col=1)
+# Update yaxis labels
+fig.update_yaxes(title_text="Principal component 2", row=1, col=1)
+fig.update_yaxes(title_text="Principal component 3", row=2, col=1)
+fig.update_yaxes(title_text="Principal component 3", row=3, col=1)
+# Update the layout of the figure then the app
+fig.update_layout(height=900, width=600, title="PCA plot with images", template='simple_white', showlegend=False)
+
+app.layout = html.Div([
+    dcc.Graph(id='scatter-plot', figure=fig, style={'width': '70%', 'display': 'inline-block'}),
+    dcc.Store(id='last-clicked', data=None),
+    html.Div(id='image-container', style={'width': '30%', 'display': 'inline-block', 'verticalAlign': 'top', 'textAlign': 'center'})
+], style={'backgroundColor': 'white', 'color': 'black', 'font-family': 'Arial'})
+# Callback needed
+@app.callback(Output('scatter-plot', 'figure'), Output('image-container', 'children'), Output('last-clicked', 'data'),
+			  Input('scatter-plot', 'clickData'), State('scatter-plot', 'figure'), State('last-clicked', 'data'))
+
 # Function needed for the app
 def get_image_path(target_value):
     # Function to get the image path
@@ -51,37 +77,5 @@ def display_image_link(clickData, figure, last_clicked):
         return figure, image_div, new_last_clicked
     return figure, "Click on a point to see the image", last_clicked
 
-# Create the PCA graph
-fig = make_subplots(rows=3, cols=1, vertical_spacing=0.06)
-fig.append_trace(go.Scatter(x=plot_df['Principal component 1'], y=plot_df['Principal component 2'], mode="markers", hoverinfo='text', text=plot_df['Target']), row=1, col=1)
-fig.append_trace(go.Scatter(x=plot_df['Principal component 2'], y=plot_df['Principal component 3'], mode="markers", hoverinfo='text', text=plot_df['Target']), row=2, col=1)
-fig.append_trace(go.Scatter(x=plot_df['Principal component 1'], y=plot_df['Principal component 3'], mode="markers", hoverinfo='text', text=plot_df['Target']), row=3, col=1)
-fig.update_traces(marker=dict(color=['blue'] * len(plot_df)))
-# Update xaxis labels
-fig.update_xaxes(title_text="Principal component 1", row=1, col=1)
-fig.update_xaxes(title_text="Principal component 2", row=2, col=1)
-fig.update_xaxes(title_text="Principal component 1", row=3, col=1)
-# Update yaxis labels
-fig.update_yaxes(title_text="Principal component 2", row=1, col=1)
-fig.update_yaxes(title_text="Principal component 3", row=2, col=1)
-fig.update_yaxes(title_text="Principal component 3", row=3, col=1)
-# Update the layout of the figure then the app
-fig.update_layout(height=900, width=600, title="PCA plot with images", template='simple_white', showlegend=False)
-
-app.layout = html.Div([
-    dcc.Graph(id='scatter-plot', figure=fig, style={'width': '70%', 'display': 'inline-block'}),
-    dcc.Store(id='last-clicked', data=None),
-    html.Div(id='image-container', style={'width': '30%', 'display': 'inline-block', 'verticalAlign': 'top', 'textAlign': 'center'})
-], style={'backgroundColor': 'white', 'color': 'black', 'font-family': 'Arial'})
-# Callback needed
-@app.callback(
-    Output('scatter-plot', 'figure'),
-    Output('image-container', 'children'),
-    Output('last-clicked', 'data'),
-    Input('scatter-plot', 'clickData'),
-    State('scatter-plot', 'figure'),
-    State('last-clicked', 'data')
-)
-
 if __name__ == '__main__':
-    app.run_server(debug=True)
+	app.run_server(debug=True)
