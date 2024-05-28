@@ -66,8 +66,6 @@ def display_image_link(clickData, figure, last_clicked):
             html.Img(src=f'data:image/png;base64,{encoded_image}',
                      style={'width': '400px', 'height': 'auto', 'margin': '0 auto'}),
             html.Br(),
-            html.A('Open Graph in New Window', href='http://localhost:8050', target='_blank', 
-                   style={'fontSize': '20px', 'textDecoration': 'none', 'color': 'blue'})
         ])
         return figure, image_div, new_last_clicked
     return figure, "Click on a point to see the image", last_clicked
