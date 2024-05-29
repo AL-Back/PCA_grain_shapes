@@ -84,7 +84,7 @@ def display_image_link(clickData, figure, last_clicked):
         new_last_clicked = point_index
         # Display the image with maintained aspect ratio
         image_div = html.Div([
-            html.Img(src=f'data:image/png;base64,{encoded_image}', style={'width': 'auto', 'height': '400px', 'margin': '0 auto'}),
+            html.Img(src=f'data:image/png;base64,{encoded_image}', style={'width': 'auto', 'height': '300px', 'margin': '0 auto'}),
             html.Br(),
             html.H4(target_value.rsplit('.', 1)[0], style={'textAlign': 'center'})
         ])
