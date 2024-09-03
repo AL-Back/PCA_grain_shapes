@@ -8,6 +8,7 @@ import base64
 
 # Initiate the app
 app = dash.Dash(__name__)
+server = app.server
 
 # Get the PCA data
 plot_df = pd.read_csv('PCA2_galena_grains.csv')
