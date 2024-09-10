@@ -71,7 +71,7 @@ app.layout = html.Div([
 # Function needed for the app
 def get_image_path(target_value):
     # Function to get the image path
-    return f'#Galena_binary_images/{target_value}' #Galena_binary_images/ #Github
+    return f'Galena_binary_images/{target_value}' #Galena_binary_images/ #Github
     
 def display_image_link(clickData, figure, last_clicked):
     if clickData:
