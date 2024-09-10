@@ -42,7 +42,7 @@ fig.update_layout(height=500, width=1340, plot_bgcolor='#36393e', paper_bgcolor=
 app.layout = html.Div([
     # Title box
     html.Div([
-        html.H1('Intercative PCA plot showing result obtained with galena grain images for the three principal components.')
+        html.H1('Intercative PCA plot showing results obtained with galena grain images for the three principal components.')
     ], style={'display': 'flex', 'flexDirection': 'row', 'textAlign': 'center', 'padding': '1.5rem', 'color': title_color, 'font-family': 'Arial', 'font-weight': 'bold'}),
     
     # Text container on the left
