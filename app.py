@@ -10,17 +10,20 @@ import base64
 app = dash.Dash(__name__)
 server = app.server
 
-# Get the PCA data
-plot_df = pd.read_csv('PCA2_galena_grains.csv')
+# Color
+title_color = '#5e9dd7'
+axis_color = '#93bde3'
+point_color = '#5eaeeb'
+clicked_pt_color = '#ffbe0a'
 
 # Create the PCA graph
-fig = make_subplots(rows=1, cols=3, horizontal_spacing=0.06)
+fig = make_subplots(rows=1, cols=3, vertical_spacing=1)
 fig.append_trace(go.Scatter(x=plot_df['Principal component 1'], y=plot_df['Principal component 2'], mode="markers", hoverinfo='text', text=plot_df['Target']), row=1, col=1)
 fig.append_trace(go.Scatter(x=plot_df['Principal component 2'], y=plot_df['Principal component 3'], mode="markers", hoverinfo='text', text=plot_df['Target']), row=1, col=2)
 fig.append_trace(go.Scatter(x=plot_df['Principal component 1'], y=plot_df['Principal component 3'], mode="markers", hoverinfo='text', text=plot_df['Target']), row=1, col=3)
-fig.update_traces(marker=dict(color=['#0032D4'] * len(plot_df)))  # Initialize with blue color
+fig.update_traces(marker=dict(color=[point_color] * len(plot_df)))  # Initialize with blue color
 # Dictionnaries for axis label style
-axis_font=dict(family='Arial, sans-serif', size=16, color='#001E80')
+axis_font=dict(family='Arial, sans-serif', size=16, color=axis_color)
 
 # Update xaxis properties
 fig.update_xaxes(title_text="<b>PC 1: Size</b>", titlefont=axis_font, row=1, col=1)
@@ -31,21 +34,21 @@ fig.update_yaxes(title_text="<b>PC 2: Roundness</b>", titlefont=axis_font, row=1
 fig.update_yaxes(title_text="<b>PC 3: Roughness</b>", titlefont=axis_font, row=1, col=2)
 fig.update_yaxes(title_text="<b>PC 3: Roughness</b>", titlefont=axis_font, row=1, col=3)
 # Update labels for the first subplot
-fig.update_layout(height=500, width=1340, template='plotly_white', showlegend=False)
+fig.update_layout(height=500, width=1340, plot_bgcolor='#36393e', paper_bgcolor='#36393e', showlegend=False)
 
 app.layout = html.Div([
     # Title box
     html.Div([
         html.H1('Intercative PCA plot showing result obtained with galena grain images for the three principal components.')
-    ], style={'display': 'flex', 'flexDirection': 'row', 'textAlign': 'center', 'padding': '1.5rem', 'color': '#001E80', 'font-family': 'Arial', 'font-weight': 'bold'}),
+    ], style={'display': 'flex', 'flexDirection': 'row', 'textAlign': 'center', 'padding': '1.5rem', 'color': title_color, 'font-family': 'Arial', 'font-weight': 'bold'}),
     
     # Text container on the left
     html.Div([
         html.P(
             'The graphs below show the result of the three principal components (PC1 to 3) analysis on the galena shape descriptors. The shape descriptors are extracted from the galena binary images using python.'
-            'The librairy is available on GitHub using the following link <>. When you click on a data point, the corresponding image alongside its label will be displayed below the graph, and the data point will turn red across all subplots.'
+            'The librairy is available on GitHub using the following link <>. When you click on a data point, the corresponding image alongside its label will be displayed below the graph, and the data point will turn yellow across all subplots.'
             'The displayed images have a fixed size but the aspect ration is kept. PC1 likely sorts the grains by size (visible thanks to the image resolution), PC2 by roundness, and PC3 by rugosity.')],
-            style={'textAlign': 'left', 'margin': '1.25rem', 'color': 'black', 'font-family': 'Arial'}),
+            style={'textAlign': 'left', 'margin': '1.25rem', 'color': 'white', 'font-family': 'Arial'}),
     
     # Graph container at the top
     html.Div([
@@ -58,12 +61,12 @@ app.layout = html.Div([
         id='image-container', style={'flex': '1', 'textAlign': 'center', 'padding': '10px'}
     ),
 
-], style={'backgroundColor': 'white', 'color': 'black', 'font-family': 'Arial', 'justify-content': 'center'})
+], style={'backgroundColor': '#36393e', 'color': 'white', 'font-family': 'Arial', 'justify-content': 'center'})
 
 # Function needed for the app
 def get_image_path(target_value):
     # Function to get the image path
-    return f'Galena_binary_images/{target_value}'
+    return f'C:\\Users\\alback\\02_Python-UQAC\\Test_img\\LG_galena\\grain_cnt\\{target_value}' #Galena_binary_images/ #Github
     
 def display_image_link(clickData, figure, last_clicked):
     if clickData:
@@ -78,13 +81,13 @@ def display_image_link(clickData, figure, last_clicked):
         # Ensure 'color' is a list of colors for all traces
         for trace in figure['data']:
             if isinstance(trace['marker']['color'], str):
-                trace['marker']['color'] = ['#0032D4'] * len(plot_df)
+                trace['marker']['color'] = ['#5eaeeb'] * len(plot_df)
 
         # Update the marker color for all traces
         for trace in figure['data']:
             if last_clicked is not None:
-                trace['marker']['color'][last_clicked] = '#0032D4'  # Reset previous clicked point color
-            trace['marker']['color'][point_index] = 'red'  # Set new clicked point color
+                trace['marker']['color'][last_clicked] = point_color  # Reset previous clicked point color
+            trace['marker']['color'][point_index] = clicked_pt_color  # Set new clicked point color
 
         new_last_clicked = point_index
 
