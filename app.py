@@ -69,7 +69,7 @@ app.layout = html.Div([
 # Function needed for the app
 def get_image_path(target_value):
     # Function to get the image path
-    return f'C:\\Users\\alback\\02_Python-UQAC\\Test_img\\LG_galena\\grain_cnt\\{target_value}' #Galena_binary_images/ #Github
+    return f'Galena_binary_images/{target_value}' #Galena_binary_images/ #Github
     
 def display_image_link(clickData, figure, last_clicked):
     if clickData:
@@ -84,7 +84,7 @@ def display_image_link(clickData, figure, last_clicked):
         # Ensure 'color' is a list of colors for all traces
         for trace in figure['data']:
             if isinstance(trace['marker']['color'], str):
-                trace['marker']['color'] = ['#5eaeeb'] * len(plot_df)
+                trace['marker']['color'] = [point_color] * len(plot_df)
 
         # Update the marker color for all traces
         for trace in figure['data']:
