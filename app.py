@@ -18,6 +18,7 @@ title_color = '#5e9dd7'
 axis_color = '#93bde3'
 point_color = '#5eaeeb'
 clicked_pt_color = '#ffbe0a'
+tick_color = '#c8c8c8'
 
 # Create the PCA graph
 fig = make_subplots(rows=1, cols=3, vertical_spacing=1)
@@ -29,13 +30,14 @@ fig.update_traces(marker=dict(color=[point_color] * len(plot_df)))  # Initialize
 axis_font=dict(family='Arial, sans-serif', size=16, color=axis_color)
 
 # Update xaxis properties
-fig.update_xaxes(title_text="<b>PC 1: Size</b>", titlefont=axis_font, row=1, col=1)
-fig.update_xaxes(title_text="<b>PC 2: Roundness</b>", titlefont=axis_font, row=1, col=2)
-fig.update_xaxes(title_text="<b>PC 1: Size</b>", titlefont=axis_font, row=1, col=3)
+fig.update_xaxes(title_text="<b>PC 1: Size</b>", titlefont=axis_font, tickfont=dict(family='Arial, sans-serif', color=tick_color, size=13), gridcolor=tick_color, row=1, col=1)
+fig.update_xaxes(title_text="<b>PC 2: Roundness</b>", titlefont=axis_font, tickfont=dict(family='Arial, sans-serif', color=tick_color, size=13), gridcolor=tick_color, row=1, col=2)
+fig.update_xaxes(title_text="<b>PC 1: Size</b>", titlefont=axis_font, tickfont=dict(family='Arial, sans-serif', color=tick_color, size=13), gridcolor=tick_color, row=1, col=3)
 # Update yaxis properties
-fig.update_yaxes(title_text="<b>PC 2: Roundness</b>", titlefont=axis_font, row=1, col=1)
-fig.update_yaxes(title_text="<b>PC 3: Roughness</b>", titlefont=axis_font, row=1, col=2)
-fig.update_yaxes(title_text="<b>PC 3: Roughness</b>", titlefont=axis_font, row=1, col=3)
+fig.update_yaxes(title_text="<b>PC 2: Roundness</b>", titlefont=axis_font, tickfont=dict(family='Arial, sans-serif', color=tick_color, size=13), gridcolor=tick_color, row=1, col=1)
+fig.update_yaxes(title_text="<b>PC 3: Roughness</b>", titlefont=axis_font, tickfont=dict(family='Arial, sans-serif', color=tick_color, size=13), gridcolor=tick_color, row=1, col=2)
+fig.update_yaxes(title_text="<b>PC 3: Roughness</b>", titlefont=axis_font, tickfont=dict(family='Arial, sans-serif', color=tick_color, size=13), gridcolor=tick_color, row=1, col=3)
+
 # Update labels for the first subplot
 fig.update_layout(height=500, width=1340, plot_bgcolor='#36393e', paper_bgcolor='#36393e', showlegend=False)
 
@@ -61,7 +63,7 @@ app.layout = html.Div([
     
     # Image container on the right
     html.Div(
-        id='image-container', style={'flex': '1', 'textAlign': 'center', 'padding': '10px'}
+        id='image-container', style={'flex': '1', 'textAlign': 'center', 'padding': '10px', 'color':clicked_pt_color}
     ),
 
 ], style={'backgroundColor': '#36393e', 'color': 'white', 'font-family': 'Arial', 'justify-content': 'center'})
@@ -69,7 +71,7 @@ app.layout = html.Div([
 # Function needed for the app
 def get_image_path(target_value):
     # Function to get the image path
-    return f'Galena_binary_images/{target_value}' #Galena_binary_images/ #Github
+    return f'#Galena_binary_images/{target_value}' #Galena_binary_images/ #Github
     
 def display_image_link(clickData, figure, last_clicked):
     if clickData:
