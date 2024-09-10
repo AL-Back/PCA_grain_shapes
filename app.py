@@ -10,6 +10,9 @@ import base64
 app = dash.Dash(__name__)
 server = app.server
 
+# Get the PCA data
+plot_df = pd.read_csv('PCA2_galena_grains.csv')
+
 # Color
 title_color = '#5e9dd7'
 axis_color = '#93bde3'
