@@ -51,7 +51,7 @@ app.layout = html.Div([
     html.Div([
         html.P(
             'The graphs below show the result of the three principal components (PC1 to 3) analysis on the galena shape descriptors. The shape descriptors are extracted from the galena binary images using python.'
-            'The librairy is available on GitHub using the following link <>. When you click on a data point, the corresponding image alongside its label will be displayed below the graph, and the data point will turn yellow across all subplots.'
+            'The librairy is available on GitHub using the following link <https://github.com/Cyrilkt/Image-Processing-Descriptors>. When you click on a data point, the corresponding image alongside its label will be displayed below the graph, and the data point will turn yellow across all subplots.'
             'The displayed images have a fixed size but the aspect ration is kept. PC1 likely sorts the grains by size (visible thanks to the image resolution), PC2 by roundness, and PC3 by rugosity.')],
             style={'textAlign': 'left', 'margin': '1.25rem', 'color': 'white', 'font-family': 'Arial'}),
     
