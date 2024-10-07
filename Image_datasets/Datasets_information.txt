@@ -1,0 +1,35 @@
+Test1_images	
+Ideal shapes: reference dataset. The orientation data isn’t valid.	(3900 images)
+Folder: Test1_data.zip
+
+Test2_images
+Low Perlin noise intensity. The orientation data isn’t valid.	(3900 images)
+Folder: Test2_data.zip
+
+Test3_images
+High Perlin noise intensity. The orientation data isn’t valid.(3900 images)
+Folder: Test3_data.zip
+
+Test4_images
+Low roundness intensity. The orientation data isn’t valid.	(3900	images)
+Folder: Test4_data.zip
+
+Test5_images
+High roundness intensity. The orientation data isn’t valid.	(3900 images)
+Folder: Test5_data.zip
+
+Test8_images
+Ideal shapes for PCA validation. The orientation data isn’t valid.	(325 images)
+Folder: Test8_data.zip
+
+Orientation_images
+The orientation data is valid, only rectangle and ellipse with random axis length. Orientation is measured before and after a given rotation.	(600 images)
+Orientation-test_data.zip
+
+Galena_test
+Real grain images, 4 characteristic grain for PCA validation.	(4 images)
+Folder: Galena_test_data.zip
+
+Galena_training
+Real grain images, used for the PCA training.	(580 images)
+Folder: Galena_training_data.zip
