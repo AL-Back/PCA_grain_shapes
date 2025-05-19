@@ -40,7 +40,7 @@ class ImageHoverPlot(html.Div):
 
             current_df = loaded_data[csv_name]
             df_row = current_df.iloc[num]
-            img_src = "assets/Galena_binary_images/" + df_row['Target']
+            img_src = "Galena_binary_images/" + df_row['Target']
 
             children = [
                 html.Div([
