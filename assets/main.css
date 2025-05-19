@@ -1,0 +1,12 @@
+.main-container {
+    margin: 40px;
+}
+
+.main-container p {
+    line-height: 24px;
+}
+
+.main-container a,
+.main-container a:visited {
+    color: #586ff3;
+}
