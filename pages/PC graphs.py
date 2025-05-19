@@ -126,13 +126,13 @@ def display_image(selected_points, csv_name):
 
     if selected_points[0]:
         point = df.values[selected_points[0]]
-        image_path_left = "assets/Galena_binary_images/" + point[-1]
+        image_path_left = "Galena_binary_images/" + point[-1]
     else:
         image_path_left = None
 
     if selected_points[1]:
         point = df.values[selected_points[1]]
-        image_path_right = "assets/Galena_binary_images/" + point[-1]
+        image_path_right = "Galena_binary_images/" + point[-1]
     else:
         image_path_right = None
 
