@@ -1,0 +1,71 @@
+.graphs-container {
+    display: flex;
+    height: 500px;
+    width: 100%;
+    justify-content: center;
+}
+
+.graph-container {
+    max-width: 33.3%;
+    padding: 15px;
+}
+
+.graph {
+    box-shadow: 2px 2px 8px black;
+    background-color: #222;
+    height: 400px;
+    max-height: 400px;
+}
+
+.g-xtitle text,
+.g-ytitle text {
+    font-weight: bolder !important;
+}
+
+
+.image-tooltip {
+    width: 200px;
+    white-space: 'none';
+    margin: 0;
+    padding: 0;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.tooltip-image {
+    width: 100%;
+    height: 100%;
+}
+
+.images-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.images-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.images-wrapper.left img {
+    margin-right: auto;
+}
+
+.images-wrapper.right img {
+    margin-left: auto;
+}
+
+.images-wrapper>div {
+    box-shadow: 2px 2px 8px black;
+    background-color: #222;
+    padding: 10px;
+}
+
+.tooltip {
+    position: absolute;
+}

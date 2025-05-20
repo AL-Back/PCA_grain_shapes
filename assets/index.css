@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #333;
+    color: #BBB;
+    font-family: Open, sans-serif;
+    margin: 0px;
+    height: 100%;
+}
